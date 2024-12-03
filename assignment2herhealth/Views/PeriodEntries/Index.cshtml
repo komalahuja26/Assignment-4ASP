@@ -1,0 +1,71 @@
+﻿@model IEnumerable<assignment2herhealth.Models.PeriodEntry>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextPredictedPeriodDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+       
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextPredictedPeriodDate)
+            </td>
+          
+            <td>
+                    @if (item.Photo != null)
+                    {
+                        <img src="~/img/@item.Photo" height="30vh" width="30vh" alt="girl Photo" class="thumb" />
+                    }
+            </td>
+                
+                    @if (User.Identity.IsAuthenticated)
+                    {<td>
+                <a asp-action="Edit" asp-route-id="@item.PeriodEntryId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.PeriodEntryId">Delete</a>
+                    </td>
+                }
+                <td>
+                <a asp-action="Details" asp-route-id="@item.PeriodEntryId">Details</a> |
+                </td>
+          
+        </tr>
+}
+    </tbody>
+</table>

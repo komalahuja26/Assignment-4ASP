@@ -1,0 +1,53 @@
+﻿@model IEnumerable<assignment2herhealth.Models.HealthSuggestion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WaterIntake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HealthyFoods)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodEntry)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WaterIntake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealthyFoods)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodEntry.Name)
+            </td>
+           
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                <a asp-action="Edit" asp-route-id="@item.HealthSuggestionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HealthSuggestionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HealthSuggestionId">Delete</a>
+            </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>
